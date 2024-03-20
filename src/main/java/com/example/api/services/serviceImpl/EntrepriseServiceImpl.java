@@ -1,6 +1,7 @@
 package com.example.api.services.serviceImpl;
 
 import com.example.api.dao.EntrepriseDAO;
+import com.example.api.exceptions.EntityNotFoundException;
 import com.example.api.exceptions.ErrorCodes;
 import com.example.api.exceptions.InvalidEntityException;
 import com.example.api.models.Entreprise;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -52,16 +54,20 @@ public class EntrepriseServiceImpl implements EntrepriseServices {
     }
     @Override
     public EntrepriseDAO findById(Integer id) {
-        return null;
+        if(id==null){
+            return null;
+        }
+        Optional<Entreprise> entreprise= entrepriseRepository.findById(id);
+        return entreprise.map(EntrepriseDAO::fromEntity)
+                .orElseThrow(()-> new EntityNotFoundException("aucune entreprise trouvé pour cet id"));
     }
 
     @Override
     public List<EntrepriseDAO> findAll() {
-        return null;
+        return entrepriseRepository.findAll().stream()
+                .map(EntrepriseDAO::fromEntity)
+                .collect(Collectors.toList());
     }
 
-    @Override
-    public void delete(Integer id) {
 
-    }
 }

@@ -27,8 +27,11 @@ public class StrategyFileContext {
     private void determinContext(String context){
         final String beanName=context+"Strategy";
 
-        if(Objects.equals(context, "etablissement")){
+        if(Objects.equals(context, "etudiant")){
             strategy= beanFactory.getBean(beanName,SaveEtudiantFile.class);
+        }
+        if(Objects.equals(context, "entreprise")){
+            strategy= beanFactory.getBean(beanName,SaveEntrepriseFile.class);
         }
     }
 }

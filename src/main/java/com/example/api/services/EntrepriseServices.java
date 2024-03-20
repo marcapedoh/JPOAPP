@@ -9,5 +9,4 @@ public interface EntrepriseServices {
     EntrepriseDAO save(EntrepriseDAO entrepriseDAO);
     EntrepriseDAO findById(Integer id);
     List<EntrepriseDAO> findAll();
-    void delete(Integer id);
 }

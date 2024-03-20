@@ -8,5 +8,4 @@ public interface EtudiantServices {
     EtudiantDAO save(EtudiantDAO etudiantDAO);
     EtudiantDAO findById(Integer id);
     List<EtudiantDAO> findAll();
-    void delete(Integer id);
 }

@@ -1,6 +1,7 @@
 package com.example.api.services.serviceImpl;
 
 import com.example.api.dao.EtudiantDAO;
+import com.example.api.exceptions.EntityNotFoundException;
 import com.example.api.exceptions.ErrorCodes;
 import com.example.api.exceptions.InvalidEntityException;
 import com.example.api.models.Etudiant;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -53,16 +55,20 @@ public class EtudiantServiceImpl implements EtudiantServices {
 
     @Override
     public EtudiantDAO findById(Integer id) {
-        return null;
+        if(id==null){
+            return null;
+        }
+        return etudiantRepository.findById(id)
+                .map(EtudiantDAO::fromEntity)
+                .orElseThrow(()-> new EntityNotFoundException("aucun etudiant trouvé pour cet id dans la base de donnée"));
     }
 
     @Override
     public List<EtudiantDAO> findAll() {
-        return null;
+        return etudiantRepository.findAll().stream()
+                .map(EtudiantDAO::fromEntity)
+                .collect(Collectors.toList());
     }
 
-    @Override
-    public void delete(Integer id) {
 
-    }
 }
