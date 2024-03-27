@@ -5,6 +5,7 @@ import com.example.api.exceptions.EntityNotFoundException;
 import com.example.api.exceptions.ErrorCodes;
 import com.example.api.exceptions.InvalidEntityException;
 import com.example.api.models.Option;
+import com.example.api.reporitory.DomainEtudeRepository;
 import com.example.api.reporitory.OptionRepository;
 import com.example.api.services.OptionServices;
 import com.example.api.validator.OptionValidator;
@@ -23,12 +24,10 @@ import java.util.stream.Collectors;
 @Slf4j
 public class OptionServiceImpl implements OptionServices {
     private OptionRepository optionRepository;
-
     @Autowired
     public OptionServiceImpl(OptionRepository optionRepository) {
         this.optionRepository = optionRepository;
     }
-
     @Override
     public OptionDAO save(OptionDAO optionDAO) {
         List<String> errors= OptionValidator.validate(optionDAO);
@@ -36,6 +35,7 @@ public class OptionServiceImpl implements OptionServices {
             log.warn("option non valide {}",optionDAO);
             throw new InvalidEntityException("l'option n'est pas valide", ErrorCodes.OPTION_NOT_VALID,errors);
         }
+
         return OptionDAO.fromEntity(
                 optionRepository.save(
                         OptionDAO.toEntity(optionDAO)
@@ -66,6 +66,7 @@ public class OptionServiceImpl implements OptionServices {
         if(id==null){
             return;
         }
+
         optionRepository.deleteById(id);
     }
 }

@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class EtudiantDAO {
+    private Integer id;
     private String nom;
     private String prenom;
     private LocalDate dateNais;
@@ -30,8 +31,10 @@ public class EtudiantDAO {
             return  null;
         }
         return EtudiantDAO.builder()
+                .id(etudiant.getId())
                 .nom(etudiant.getNom())
                 .prenom(etudiant.getPrenom())
+                .gender(etudiant.getGender())
                 .dateNais(etudiant.getDateNais())
                 .photo(etudiant.getPhoto())
                 .phone(etudiant.getPhone())
@@ -45,10 +48,12 @@ public class EtudiantDAO {
             return null;
         }
         Etudiant etudiant= new Etudiant();
+        etudiant.setId(etudiantDAO.getId());
         etudiant.setNom(etudiantDAO.getNom());
         etudiant.setPrenom(etudiantDAO.getPrenom());
+        etudiant.setGender(etudiantDAO.getGender());
         etudiant.setDateNais(etudiantDAO.getDateNais());
-        etudiant.setPhoto(etudiant.getPhoto());
+        etudiant.setPhoto(etudiantDAO.getPhoto());
         etudiant.setPhone(etudiantDAO.getPhone());
         etudiant.setMotDePasse(etudiantDAO.getMotDePasse());
         etudiant.setDomainEtudeEtud(DomainEtudeDAO.toEntity(etudiantDAO.getDomainEtudeEtud()));

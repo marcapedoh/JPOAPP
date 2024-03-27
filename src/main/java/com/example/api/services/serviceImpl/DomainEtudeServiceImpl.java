@@ -30,6 +30,7 @@ public class DomainEtudeServiceImpl implements DomainEtudeServices {
              log.error("on ne peut pas enregistrer un domaine d'etude {} qui est vide",domainEtudeDAO);
              throw new InvalidEntityException("vous fournissez un domaine d'étude invalid", ErrorCodes.DOMAINETUDE_INVALID,errors);
          }
+         log.warn("mon objet {}",domainEtudeDAO);
 
         return DomainEtudeDAO.fromEntity(
                 domainEtudeRepository.save(
@@ -40,6 +41,7 @@ public class DomainEtudeServiceImpl implements DomainEtudeServices {
 
     @Override
     public List<DomainEtudeDAO> findAll() {
+
         return domainEtudeRepository.findAll().stream()
                 .map(DomainEtudeDAO::fromEntity)
                 .collect(Collectors.toList());

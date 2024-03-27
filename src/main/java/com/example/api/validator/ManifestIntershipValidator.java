@@ -14,7 +14,7 @@ public class ManifestIntershipValidator {
         if(manifestIntershipDAO==null){
             errors.add("vous fournissez une manisfestion vide");
         }
-        assert manifestIntershipDAO != null;
+
         if(!StringUtils.hasLength(manifestIntershipDAO.getCv())){
             errors.add("le cv est important que tout");
         }

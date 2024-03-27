@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ManifestIntershipDAO {
+    private Integer id;
     private EtudiantDAO etudiant;
     private String cv;
     private String lettreMotivation;
@@ -22,6 +23,7 @@ public class ManifestIntershipDAO {
             return null;
         }
         return ManifestIntershipDAO.builder()
+                .id(manifestIntership.getId())
                 .etudiant(EtudiantDAO.fromEntity(manifestIntership.getEtudiant()))
                 .cv(manifestIntership.getCv())
                 .lettreMotivation(manifestIntership.getLettreMotivation())
@@ -34,6 +36,7 @@ public class ManifestIntershipDAO {
             return  null;
         }
         ManifestIntership manifestIntership= new ManifestIntership();
+        manifestIntership.setId(manifestIntershipDAO.getId());
         manifestIntership.setEtudiant(EtudiantDAO.toEntity(manifestIntershipDAO.getEtudiant()));
         manifestIntership.setCv(manifestIntershipDAO.getCv());
         manifestIntership.setLettreMotivation(manifestIntershipDAO.getLettreMotivation());

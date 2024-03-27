@@ -1,5 +1,6 @@
 package com.example.api.dao;
 
+import com.example.api.models.OffreOpportunite;
 import com.example.api.models.Option;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -15,8 +16,11 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class OptionDAO{
-    @JsonIgnore
+    private  Integer id;
     private DomainEtudeDAO domainEtude;
+
+    @JsonIgnore
+    private List<OffreOpportunite> listOffres;
     private String title;
 
     public static OptionDAO fromEntity(Option option){
@@ -24,8 +28,9 @@ public class OptionDAO{
             return null;
         }
         return OptionDAO.builder()
-
+                .id(option.getId())
                 .title(option.getTitle())
+                .domainEtude(DomainEtudeDAO.fromEntity(option.getDomainEtude()))
                 .build();
     }
 
@@ -34,8 +39,9 @@ public class OptionDAO{
             return null;
         }
         Option option= new Option();
-
+        option.setId(optionDAO.getId());
         option.setTitle(optionDAO.getTitle());
+        option.setDomainEtude(DomainEtudeDAO.toEntity(optionDAO.getDomainEtude()));
         return option;
     }
     public static List<OptionDAO> fromEntityList(List<Option> options){
@@ -46,7 +52,6 @@ public class OptionDAO{
         for (Option element: options) {
             list.add(OptionDAO.builder()
                     .title(element.getTitle())
-                    .domainEtude(DomainEtudeDAO.fromEntity(element.getDomainEtude()))
                     .build());
         }
         return list;
@@ -60,7 +65,6 @@ public class OptionDAO{
         for (OptionDAO element: options) {
             list.add(Option.builder()
                     .title(element.getTitle())
-                    .domainEtude(DomainEtudeDAO.toEntity(element.getDomainEtude()))
                     .build());
         }
         return list;

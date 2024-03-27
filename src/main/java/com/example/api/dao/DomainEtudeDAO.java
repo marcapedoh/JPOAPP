@@ -15,11 +15,12 @@ import java.util.List;
 @Builder
 @Data
 public class DomainEtudeDAO {
+    private Integer id;
+    private String title;
+    @JsonIgnore
     private List<OptionDAO> options;
     @JsonIgnore
     private List<EtudiantDAO> listEtudiant;
-    @JsonIgnore
-    private List<OffreOpportuniteDAO> listOffre;
 
 
     public static DomainEtudeDAO fromEntity(DomainEtude domainEtude){
@@ -27,7 +28,8 @@ public class DomainEtudeDAO {
             return null;
         }
         return DomainEtudeDAO.builder()
-                .options(OptionDAO.fromEntityList(domainEtude.getOptions()))
+                .id(domainEtude.getId())
+                .title(domainEtude.getTitle())
                 .build();
     }
     public  static  DomainEtude toEntity(DomainEtudeDAO domainEtudeDAO){
@@ -35,8 +37,8 @@ public class DomainEtudeDAO {
             return  null;
         }
         DomainEtude domainEtude= new DomainEtude();
-        domainEtude.setOptions(OptionDAO.toEntityList(domainEtudeDAO.getOptions()));
-
+        domainEtude.setId(domainEtudeDAO.getId());
+        domainEtude.setTitle(domainEtudeDAO.getTitle());
         return domainEtude;
     }
 

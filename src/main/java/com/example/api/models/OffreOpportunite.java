@@ -25,6 +25,6 @@ public class OffreOpportunite extends AbstractEntity{
     @JoinColumn(name="idEntreprise")
     private Entreprise entreprise;
     @ManyToOne
-    @JoinColumn(name = "idDomainEtude")
-    private DomainEtude domainEtudeOffr;
+    @JoinColumn(name = "idOption")
+    private Option option;
 }

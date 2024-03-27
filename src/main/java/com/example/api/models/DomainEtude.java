@@ -15,10 +15,9 @@ import java.util.List;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 public class DomainEtude extends AbstractEntity{
+    private String title;
     @OneToMany(mappedBy = "domainEtude")
     private List<Option> options;
     @OneToMany(mappedBy = "domainEtudeEtud")
     private List<Etudiant> listEtudiant;
-    @OneToMany(mappedBy = "domainEtudeOffr")
-    private List<OffreOpportunite> listOffre;
 }

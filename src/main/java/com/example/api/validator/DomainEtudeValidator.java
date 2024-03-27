@@ -11,12 +11,9 @@ public class DomainEtudeValidator {
         List<String> errors= new ArrayList<>();
         if(domainEtudeDAO==null){
             errors.add("vous passez un domainEtude null!");
-            errors.add("les options sont obligatoires");
         }
         assert domainEtudeDAO != null;
-        if(domainEtudeDAO.getOptions()==null){
-            errors.add("les options sont obligatoires");
-        }
+
         return errors;
     }
 }

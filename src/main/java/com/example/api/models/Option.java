@@ -1,10 +1,9 @@
 package com.example.api.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -16,6 +15,8 @@ public class Option extends AbstractEntity{
     @ManyToOne
     @JoinColumn(name = "idDomainEtude")
     private DomainEtude domainEtude;
-    @Column(name = "title",nullable = false)
+    @Column(name = "title",nullable = false,unique = true)
     private String title;
+    @OneToMany(mappedBy = "option")
+    private List<OffreOpportunite> listOffres;
 }

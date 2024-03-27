@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class EntrepriseDAO {
+    private Integer id;
     private String nom;
    private String mail;
     private String photo;
@@ -28,6 +29,7 @@ public class EntrepriseDAO {
             return null;
         }
         return EntrepriseDAO.builder()
+                .id(entreprise.getId())
                 .nom(entreprise.getNom())
                 .mail(entreprise.getMail())
                 .photo(entreprise.getPhoto())
@@ -39,6 +41,7 @@ public class EntrepriseDAO {
             return null;
         }
         Entreprise entreprise= new Entreprise();
+        entreprise.setId(entrepriseDAO.getId());
         entreprise.setNom(entrepriseDAO.getNom());
         entreprise.setPhoto(entrepriseDAO.getPhoto());
         entreprise.setMail(entrepriseDAO.getMail());
